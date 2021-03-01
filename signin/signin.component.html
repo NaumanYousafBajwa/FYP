@@ -1,0 +1,73 @@
+<div class="authentication">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12">
+                <form class="card auth_form" role="form" #signinForm="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="header">
+                        <img class="logo" src="assets/images/logo.svg" alt="" />
+                        <h5>Log in</h5>
+                    </div>
+                    <div class="body">
+                        <div class="input-group mb-3">
+                            <input class="form-control" placeholder="Email" type="email" name="email"
+                                [(ngModel)]="model.email" ngModel #email="ngModel"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngIf="email.touched">
+                            <p *ngIf="email.errors?.required" class="alert alert-danger small">Email is a
+                                required field!</p>
+                            <p *ngIf="email.errors?.pattern" class="alert alert-danger small">This is not a
+                                valid Email!!!</p>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input class="form-control" name="password" placeholder="Password"
+                                [type]="flags.fieldTextType ? 'text' : 'password'" [(ngModel)]="model.password" ngModel
+                                #password="ngModel" required>
+                            <div *ngIf="!flags.fieldTextType" class="input-group-append cursor-point"
+                                (click)="toggleFieldTextType()">
+                                <span class="input-group-text">
+                                    <i *ngIf="!flags.fieldTextType" class="fas fa-eye"></i>
+                                </span>
+                            </div>
+                            <div *ngIf="flags.fieldTextType" class="input-group-append cursor-point"
+                                (click)="toggleFieldTextType()">
+                                <span class="input-group-text">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngIf="password.touched">
+                            <p *ngIf="password.errors?.required" class="alert alert-danger small">Password is a
+                                required field!</p>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary my-4"
+                                [disabled]="password.errors || email.errors">Sign in</button>
+                        </div>
+                        <div class="signin_with mt-3">
+                            <p class="mb-0">or Sign Up using</p>
+                            <button class="btn btn-primary btn-icon btn-round" (click)="signInWithGoogle()">
+                                <i class="fab fa-google"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="copyright text-center">
+                    &copy;
+                    <span>, All Rights Reserved</span>
+                </div>
+            </div>
+            <div class="col-lg-8 col-sm-12">
+                <div class="card">
+                    <img src="../../../assets/images/signin.svg" alt="Sign In" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
